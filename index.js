@@ -2,7 +2,7 @@ const express = require('express');
 
 const path = require("path");
 const TelegramBot = require("node-telegram-bot-api");
-let TOKEN;
+const TOKEN = process.env.TOKEN;
 
 const app = express();
 
@@ -35,7 +35,7 @@ bot.on("inline_query", function(iq) {
 	bot.answerInlineQuery(iq.id, [ { type: "game", id: "0", game_short_name: gameName } ] );
 	});
 
-server.get("/highscore/:score", function(req, res, next) {
+app.get("/highscore/:score", function(req, res, next) {
 	if (!Object.hasOwnProperty.call(queries, req.query.id)) return   next();
 	 let query = queries[req.query.id];
   let options;
